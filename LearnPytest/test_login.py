@@ -6,3 +6,6 @@ def testLogoff():
 
 def testCalculation():
     assert 2+2 == 4
+
+def testmergetomain():
+    print("successfully merged to main")
