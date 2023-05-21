@@ -1,0 +1,88 @@
+!! Basic Commands!!
+
+1:pytest: to test the scenarios
+2:pytest -v: it shows the test case passes or not like[passes/failed]
+3:pytest -s: it also prints the string/print statement in terminal
+4:pytest -k: if we want to execute any chose function with their keywords in function then we can use this.
+5:pytest LearnPytest\test_markers.py -v : This is to run a single folder/file inside a Package.
+6:pytest -vsk "keyword": this is used to run all 3 at a time.
+
+!! Markers!!
+7:pytest -m: this is marker for the function[@pytest.marker.sanity]/ to run only marked function.
+        [@pytest -m sanity][@pytest -m xfail][based on annotation of function]
+        [@pytest.mark.sanity/xfail/regression/skip/skipIf...!!! etc...[custom markers we can use like sanity]]
+        [xfail is like if your module hasn't build and u dont want to run that module, u can skip or u can use xfail, so it will be not marked as a failed test case.]
+
+!!Fixtures!!
+Fixtures are used to run any programme before and after the current programme.
+[@pytest.fixtures]
+8:def setUp(): this function holds what should run before running a current Function.
+
+            ex:def setUp():
+                    print("run this")
+               def testfunction(setUP):
+                    print(" run me")
+            o/p: """run this
+                 run me Passed""".
+!!Yield!!
+This is same like fixtures but this is tare down, means this runs after the execution of function.
+9:          ex:def setUp():
+                    print("run this")
+                yield
+                    print("run me after ")
+               def testfunction(setUP):
+                    print(" run me")
+
+                """o/p: run this
+                     run me
+                     run me after"""
+
+!! Conftest !!
+This is the main file, where we can write a set of methods which run for all the test cases, so no need to write them again and again.
+10: @pytest.fixtures(autouse=True): this methods if we use [autosave], no need to call this function anywhere, it automatically runs for all the function.
+        ex:@pytest.fixture(scope="session", autouse=True)
+
+                        def tc_setUp():
+                            print("Login")
+                            print("click on take assessment")
+                            print("back to dashboard")
+                            yield
+                            print("click on forms and save details")
+                            print(" click on next or back button ")
+       """When you call any other file, this file will run first and the current file current method."""
+!! Scope !!
+As the name defines, what is the scope of the conftest file.
+11:@pytest.fixture(scope="session/function/class/package/module")
+
+        ex:@pytest.fixture(scope="session")
+                        def tc_setUp():
+                            print("Login")
+                            print("click on take assessment")
+                            print("back to dashboard")
+                            yield
+                            print("click on forms and save details")
+                            print(" click on next or back button ")
+
+              """This function will be available till the end of session."""
+
+# if we use function that will be available only for function and for next function again it will run.
+@ So it is like session means only once for session, function means for every function once,class means for every class once,package means for every package once
+@ like for every Scope once!!!!!!!!
+
+!! Parameter !!
+Parameter is like sending values to text boxes, like send_keys("values")
+12:@pytest.fixtures(params="a","b")
+          " This is using Fixtures"
+        "this is where u can pass the parameters and those parameters will be evaluated one by one."[in a loop]
+
+        ex:@pytest.fixture(params=["a","b"])
+                        def demo_fixture(request):
+                            print(request.param)
+
+        " Or we can sue the Same thing using Marker"
+        " This is where u can send the values hardcoded and Provide the variables used in the function to Calculate"
+
+        ex:@pytest.mark.parametrize("a, b, Sum", [(1, 2, 7), (2, 4, 6), (5, 5, 10), (5, 6, 12)])
+        def testAdd(a, b, Sum):
+            assert a + b == sum
+
