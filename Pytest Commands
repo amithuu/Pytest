@@ -86,3 +86,5 @@ Parameter is like sending values to text boxes, like send_keys("values")
         def testAdd(a, b, Sum):
             assert a + b == sum
 
+13: @pytest -vs --browser chrome
+        " This command is used to run the test files in Chrome Browser"

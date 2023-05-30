@@ -1,7 +1,7 @@
 import pytest
 
 
-# @pytest.fixture
+# @pytest.fixture()
 def setUp():
     print("Login")
     print("click on take assesment")

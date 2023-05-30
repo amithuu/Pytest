@@ -8,7 +8,6 @@ def testLogoff():
 @pytest.mark.xfail
 def testCalculation():
     assert 2+2 == 4
-
 @pytest.mark.sanity
 def testmergetomain():
     print("successfully merged to main")

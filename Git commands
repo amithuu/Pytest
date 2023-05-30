@@ -1,5 +1,5 @@
 Step 1: Clone the repository or update your local repository with the latest changes.
-git pull origin master
+git pull origin master/dev
 
 Step 2: Switch to the head branch of the pull request.
 git checkout Dev
